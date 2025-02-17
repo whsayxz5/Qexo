@@ -127,7 +127,7 @@
                 _status = false;
                 loading.show();
                 
-                // 获取编辑器的原始内容，不添加额外内容
+                // 获取编辑器的原始内容
                 let content = vditor.getValue();
                 
                 $.ajax({
@@ -161,7 +161,7 @@
                         notyf.error("{{ "NETWORK_ERROR" | gettext }}");
                         _status = true;
                     }
-                })
+                });
             }
             if (excerpt_config.auto !== "关闭") excerpt_post(nextstep);
             else nextstep();
