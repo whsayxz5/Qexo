@@ -126,7 +126,6 @@
                 lang: '{% if language in vditor_languages %}{{ language }}{% else %}en_US{% endif %}',
                 after(d) {
                     file_content = vditor.getValue();
-                    showSidebar(true);
                 },
                 toolbarConfig: {
                     pin: true
@@ -212,7 +211,6 @@
                 lang: '{% if language in vditor_languages %}{{ language }}{% else %}en_US{% endif %}',
                 after(d) {
                     file_content = vditor.getValue();
-                    showSidebar(true);
                 },
                 // 获取焦点方法
                 focus(md) {
