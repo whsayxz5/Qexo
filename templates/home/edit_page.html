@@ -11,24 +11,11 @@
 
     <!-- Page content -->
     <div class="container-fluid">
-        <div class="mb-3">
-            <button class="btn btn-sm btn-outline-primary me-2" onclick="toggleSidebar()">
-                <i class="fas fa-cog"></i> {{ "TOGGLE_SIDEBAR" | gettext }}
-            </button>
-            <button class="btn btn-sm btn-outline-primary" onclick="toggleBottomBar()">
-                <i class="fas fa-list"></i> {{ "TOGGLE_BOTTOM" | gettext }}
-            </button>
-        </div>
         <div class="row">
             <div class="card col-md-8 px-0 ms-md-4" id="vditor-container">
                 <div id="vditor"></div>
             </div>
-            <div class="card col-md-3 ms-md-4" id="sidebar-panel" style="display: none;">
-                <div class="position-absolute top-0 end-0 mt-3 me-3">
-                    <button class="btn btn-link p-0" onclick="toggleSidebar()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
+            <div class="card col-md-3 ms-md-4" style="display: none;">
                 <a class="text-end position-absolute col-11 mt-3" style="cursor: pointer;
                 color: #172b4d"
                    href="javascript:editSide()"><i class="fas
@@ -117,20 +104,6 @@
             data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
         });
 
-        function toggleSidebar() {
-            const sidebarPanel = document.getElementById('sidebar-panel');
-            const editorContainer = document.getElementById('vditor-container');
-            sidebarPanel.style.display = sidebarPanel.style.display === 'none' ? 'block' : 'none';
-            editorContainer.className = sidebarPanel.style.display === 'none' ? 'card col-md-11 px-0 ms-md-4' : 'card col-md-8 px-0 ms-md-4';
-            set_vditor_size();
-        }
-
-        function toggleBottomBar() {
-            const bottomBar = document.getElementById('bottom-bar');
-            bottomBar.style.display = bottomBar.style.display === 'none' ? 'block' : 'none';
-            set_vditor_size();
-        }
-
         function set_vditor_size() {
             let height = $("#vditor-container").height();
             if (height < document.documentElement.clientHeight - 25) {
@@ -153,23 +126,17 @@
             let nextstep = function () {
                 _status = false;
                 loading.show();
+                
+                // 获取编辑器的原始内容，不添加额外内容
                 let content = vditor.getValue();
-                // 移除可能存在的前后分隔符
-                content = content.replace(/^---[\s\S]*?---\n?/, '').replace(/\n?---[\s\S]*?---$/, '');
-                $.ajax({
-            if (!_status) {
-                return false;
-            }
-            var loading = new KZ_Loading('{{ "SAVING" | gettext }}');
-            let nextstep = function () {
-                _status = false;
-                loading.show();
+                
                 $.ajax({
                     url: '/api/save_page/',
                     method: 'post',
                     data: {
-                        "file": "{{ file_path }}", "content": content, "front_matter":
-                            JSON.stringify(get_front_matter())
+                        "file": "{{ file_path }}", 
+                        "content": content,
+                        "front_matter": JSON.stringify(get_front_matter())
                     },
                     dataType: 'JSON',
                     success: function (res) {
@@ -183,7 +150,7 @@
                                 showSidebar(true);
                             }
                             _status = true;
-                            file_content = vditor.getValue();
+                            file_content = content; // 更新 file_content 为保存的内容
                         } else {
                             notyf.error(res.msg);
                             _status = true;
