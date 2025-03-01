@@ -542,7 +542,9 @@ def save_page(request):
             front_matter = "---\n{}---".format(yaml.dump(front_matter, allow_unicode=True))
             if not content.startswith("\n"):
                 front_matter += "\n"
-            if Provider().save(file_path, front_matter + content, commitchange):
+            #取消头部的拼接 吴剑清    
+            #if Provider().save(file_path, front_matter + content, commitchange):
+            if Provider().save(file_path, content, commitchange):
                 context = {"msg": gettext("SAVE_SUCCESS_AND_DEPLOY"), "status": True}
             else:
                 context = {"msg": gettext("SAVE_SUCCESS"), "status": True}

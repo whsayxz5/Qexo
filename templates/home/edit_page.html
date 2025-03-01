@@ -12,10 +12,11 @@
     <!-- Page content -->
     <div class="container-fluid">
         <div class="row">
-            <div class="card col-md-8 px-0 ms-md-4" id="vditor-container">
+            <div class="card col-md-10 px-0 ms-md-4" id="vditor-container">
                 <div id="vditor"></div>
             </div>
-            <div class="card col-md-3 ms-md-4" style="display: none;">
+            <!--更改页面版面 吴剑清
+            <div class="card col-md-3 ms-md-4">
                 <a class="text-end position-absolute col-11 mt-3" style="cursor: pointer;
                 color: #172b4d"
                    href="javascript:editSide()"><i class="fas
@@ -24,9 +25,11 @@
                 <hr class="my-2"/>
                 <div id="sidebar-container"></div>
             </div>
+            -->
         </div>
+        <!-- 更改页面版面 吴剑清
         <div class="row py-4">
-            <div class="card ms-md-4 col-md-11" id="bottom-bar" style="display: none;">
+            <div class="card ms-md-4 col-md-11" id="bottom-bar">
                 <div class="col-12">
                     <input type="button" class="btn btn-sm float-end mt-3"
                            value="{{ "ADD" | gettext }}"
@@ -40,6 +43,7 @@
                 </div>
             </div>
         </div>
+        -->
 
         <div class="modal fade" id="sidebarEditModal" tabindex="-1"
              aria-labelledby="sidebarModalLabel"
@@ -126,17 +130,12 @@
             let nextstep = function () {
                 _status = false;
                 loading.show();
-                
-                // 获取编辑器的原始内容
-                let content = vditor.getValue();
-                
                 $.ajax({
                     url: '/api/save_page/',
                     method: 'post',
                     data: {
-                        "file": "{{ file_path }}", 
-                        "content": content,
-                        "front_matter": JSON.stringify(get_front_matter())
+                        "file": "{{ file_path }}", "content": vditor.getValue(), "front_matter":
+                            JSON.stringify(get_front_matter())
                     },
                     dataType: 'JSON',
                     success: function (res) {
@@ -150,7 +149,7 @@
                                 showSidebar(true);
                             }
                             _status = true;
-                            file_content = content; // 更新 file_content 为保存的内容
+                            file_content = vditor.getValue();
                         } else {
                             notyf.error(res.msg);
                             _status = true;
@@ -161,7 +160,7 @@
                         notyf.error("{{ "NETWORK_ERROR" | gettext }}");
                         _status = true;
                     }
-                });
+                })
             }
             if (excerpt_config.auto !== "关闭") excerpt_post(nextstep);
             else nextstep();
