@@ -1,6 +1,6 @@
 FROM python:3.11.11-alpine3.21 AS build
 
-LABEL org.opencontainers.image.authors="abudulin@foxmail.com"
+LABEL org.opencontainers.image.authors="whsayxz@outlook.com"
 
 WORKDIR /app
 COPY . /app
