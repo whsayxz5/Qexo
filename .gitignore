@@ -8,3 +8,4 @@ configs.py
 *.db
 .env
 docker-compose.yaml
+.DS_Store
