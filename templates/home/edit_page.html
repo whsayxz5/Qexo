@@ -10,12 +10,13 @@
 {% block content %}
 
     <!-- Page content -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="card col-md-12 px-0 mx-md-4" id="vditor-container">
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="card col-12 p-0" id="vditor-container">
                 <div id="vditor"></div>
             </div>
-            <!--更改页面版面 吴剑清
+        </div>
+    <!--更改页面版面 吴剑清
             <div class="card col-md-3 ms-md-4">
                 <a class="text-end position-absolute col-11 mt-3" style="cursor: pointer;
                 color: #172b4d"
@@ -109,13 +110,11 @@
         });
 
         function set_vditor_size() {
-            let height = $("#vditor-container").height();
-            if (height < document.documentElement.clientHeight - 25) {
-                height = document.documentElement.clientHeight - 25;
-            }
+            let height = document.documentElement.clientHeight - 25;
             $("#vditor").css({
-                "height": height + "px", "width":
-                    "auto"
+                "height": height + "px",
+                "width": "100%",
+                "max-width": "100%"
             });
             if (checkIfDark()) {
                 vditor.setTheme('dark', 'dark', 'native');
