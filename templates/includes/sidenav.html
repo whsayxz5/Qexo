@@ -31,15 +31,7 @@
                     <span class="nav-link-text ms-1">{{ "HOME" | gettext }}</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link {% if 'posts' in segment %} active {% endif %}"
-                   href="/posts.html">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">{{ "POST" | gettext }}</span>
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link {% if 'pages' in segment %} active {% endif %}"
                    href="/pages.html">
@@ -69,35 +61,7 @@
                     <span class="nav-link-text ms-1">{{ "IMAGE" | gettext }}</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link {% if 'friends' in segment %} active {% endif %}"
-                   href="/friends.html">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-badge text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">{{ "FLINK" | gettext }}</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if 'talks' in segment %} active {% endif %}"
-                   href="/talks.html">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-chat-round text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">{{ "TALK" | gettext }}</span>
-                </a>
-            </li>
-            {% if request.user.is_staff %}
-                <li class="nav-item">
-                    <a class="nav-link {% if 'custom' in segment %} active {% endif %}"
-                       href="/custom.html">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-archive-2 text-danger text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">{{ "CUSTOM" | gettext }}</span>
-                    </a>
-                </li>
-            {% endif %}
+
         </ul>
     </div>
     <div class="sidenav-footer mx-3 ">
@@ -115,8 +79,6 @@
         <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/argon-dashboard"
            target="_blank" class="btn btn-dark btn-sm w-100 mb-3"
            style="display:none">Documentation</a>
-        <a href="https://www.oplog.cn/qexo"
-           target="_blank"
-           class="btn btn-sm w-100 mb-0 bg-gradient-primary">{{ "DOC" | gettext }}</a>
+
     </div>
 </aside>
